@@ -89,7 +89,8 @@ export default function BookingPage() {
     e.preventDefault()
     if (!commentText.trim()) return
     try {
-      await createComment(token, selectedBooking._id, commentText)
+      const comment = await createComment(token, selectedBooking._id, commentText)
+      setComments(prev => [...prev, comment])
       setCommentText('')
     } catch (err) {
       setError(err.message)
