@@ -50,9 +50,7 @@ export default function BookingPage() {
     },
     'comment:added': ({ bookingId, comment }) => {
       if (selectedBooking && bookingId === selectedBooking._id) {
-        setComments(prev =>
-          prev.some(c => c._id === comment._id) ? prev : [...prev, comment]
-        )
+        setComments(prev => [...prev, comment])
       }
     },
   })
@@ -91,8 +89,7 @@ export default function BookingPage() {
     e.preventDefault()
     if (!commentText.trim()) return
     try {
-      const comment = await createComment(token, selectedBooking._id, commentText)
-      setComments(prev => [...prev, comment])
+      await createComment(token, selectedBooking._id, commentText)
       setCommentText('')
     } catch (err) {
       setError(err.message)
