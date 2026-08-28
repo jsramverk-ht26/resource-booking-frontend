@@ -50,7 +50,9 @@ export default function BookingPage() {
     },
     'comment:added': ({ bookingId, comment }) => {
       if (selectedBooking && bookingId === selectedBooking._id) {
-        setComments(prev => [...prev, comment])
+        setComments(prev =>
+          prev.some(c => c._id === comment._id) ? prev : [...prev, comment]
+        )
       }
     },
   })
